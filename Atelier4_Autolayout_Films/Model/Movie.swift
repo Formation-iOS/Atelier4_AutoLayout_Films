@@ -9,15 +9,25 @@
 import UIKit
 
 class Movie: NSObject, Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case overview
+        case voteAverage = "vote_average"
+        case releaseDate = "release_date"
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+    }
+    
     var title: String = ""
     var overview: String = ""
-    var vote_average: Float = 0.0
-    var release_date : Date = Date() // The movie DB format : "2017-09-05"
-    var poster_path: String = ""
-    var backdrop_path: String = ""
+    var voteAverage: Float = 0.0
+    var releaseDate : Date = Date() // The movie DB format : "2017-09-05"
+    var posterPath: String = ""
+    var backdropPath: String? = ""
     
     override var description: String {
-        return "\(title) - (\(vote_average)/10)"
+        return "\(title) - (\(voteAverage)/10) - \(releaseDate)"
     }
     
     static func movieList () -> [Movie] {
@@ -35,12 +45,16 @@ class Movie: NSObject, Codable {
     }
     
     var image : UIImage? {
-        let imageName = String(self.poster_path.dropFirst())
+        let imageName = String(self.posterPath.dropFirst())
         return UIImage(named:imageName) ?? UIImage(named:"NoImage")
     }
     
     var landscapeImage : UIImage? {
-        let imageName = String(self.backdrop_path.dropFirst())
-        return UIImage(named:imageName) ?? UIImage(named:"NoImage")
+        if let backdropPath = backdropPath {
+            let imageName = String(backdropPath.dropFirst())
+            return UIImage(named:imageName) ?? UIImage(named:"NoImage")
+        } else {
+            return image
+        }
     }
 }

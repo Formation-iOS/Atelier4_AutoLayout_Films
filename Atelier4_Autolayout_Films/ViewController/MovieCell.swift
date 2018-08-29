@@ -25,7 +25,7 @@ class MovieCell: UITableViewCell {
         self.customImageView.image = movie.image
         self.titleLabel.text = movie.title
         self.descriptionLabel.text = movie.overview
-        self.ratingLabel.text = String(format: "Note : %.1f/10", movie.vote_average)
+        self.ratingLabel.text = String(format: "Note : %.1f/10", movie.voteAverage)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

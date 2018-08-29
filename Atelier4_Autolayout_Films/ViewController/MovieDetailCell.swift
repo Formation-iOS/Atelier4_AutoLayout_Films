@@ -17,7 +17,7 @@ class MovieDetailCell: UITableViewCell {
     
     func fill(with movie: Movie) {
         titleLabel.text = movie.title
-        ratingLabel.text = String(format: "Note : %.1f/10", movie.vote_average)
+        ratingLabel.text = String(format: "Note : %.1f/10", movie.voteAverage)
         descriptionLabel.text = movie.overview
         customImageView.image = movie.landscapeImage
     }
